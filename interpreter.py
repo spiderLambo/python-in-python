@@ -1,4 +1,5 @@
 from errors import *
+from type.primitivetype.boolean import *
 
 
 with open("file.couleuvre", "r") as doc:
@@ -44,6 +45,14 @@ for line in document:
                         vars[line[:i - 1]] = line[i + 1:]
             else:
                 raise_error("plz put somthing after the =")
+
+    # Type verification
+    for key, value in vars.items():
+        # Boolean
+        if value == "True" or value == "False":
+            vars[key] = Boolean(value)
+
+
 
 
 print(vars)
