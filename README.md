@@ -1,2 +1,3 @@
 # python-in-python
-recreates python in python
+the objective is to python in python without use native functions like eval, len...
+I only can use print
