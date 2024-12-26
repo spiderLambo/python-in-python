@@ -1,6 +1,7 @@
 from errors import *
-from type.primitivetype.boolean import *
-from type.primitivetype.string import *
+from type.primitivetype.boolean import Boolean
+from type.primitivetype.string import String
+from type.primitivetype.integer import Integer
 
 
 with open("file.couleuvre", "r") as doc:
@@ -56,6 +57,12 @@ for key, value in vars.items():
     # String
     elif (value[0] == '"'and value[-1] == '"') or (value[0] == "'" and value[-1] == "'"):
         vars[key] = String(value[1:-1])
+
+    # Integer
+    elif (value[0] in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-"]) and not ("." in value):
+        vars[key] = Integer(value)
+
+
 
 
 

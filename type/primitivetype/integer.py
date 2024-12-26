@@ -66,8 +66,18 @@ def bintodec(string):
     if string[0] == "0":
         return bintodecabs(string)
     else:
-        return bintodecabs(change1to0and0to1(rm_one(string)))
+        return - bintodecabs(change1to0and0to1(rm_one(string)))
 
 
-"""class Integer:
-    def __init__(self, value):"""
+class Integer:
+    def __init__(self, value):
+        self.__valuebin = dectobin(int(value))
+        if int(value) >= 0:
+            self.__valueabs = self.__valuebin
+            self.__valueopp = dectobin(-int(value))
+        else:
+            self.__valueabs = dectobin(-int(value))
+            self.__valueopp = self.__valuebin
+
+    def __repr__(self):
+        return str(bintodec(self.__valuebin))
