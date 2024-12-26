@@ -1,5 +1,3 @@
-from gi.overrides.keysyms import value
-
 NUMBER_OF_BYTES = 32
 
 # Function to encode absolute value in binary
