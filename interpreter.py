@@ -1,5 +1,6 @@
 from errors import *
 from type.primitivetype.boolean import *
+from type.primitivetype.string import *
 
 
 with open("file.couleuvre", "r") as doc:
@@ -46,11 +47,15 @@ for line in document:
             else:
                 raise_error("plz put somthing after the =")
 
-    # Type verification
-    for key, value in vars.items():
-        # Boolean
-        if value == "True" or value == "False":
-            vars[key] = Boolean(value)
+# Type verification
+for key, value in vars.items():
+    # Boolean
+    if value == "True" or value == "False":
+        vars[key] = Boolean(value)
+
+    # String
+    elif (value[0] == '"'and value[-1] == '"') or (value[0] == "'" and value[-1] == "'"):
+        vars[key] = String(value[1:-1])
 
 
 
