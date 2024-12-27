@@ -1,6 +1,14 @@
 from errors import *
 from type.type import *
 
+# Function to making a tuple from a string
+def makeTuple(string):
+    for i in range(len(string)):
+        if string[i] == ",":
+            return Tuple(string[:i], makeTuple(string[i+1:]))
+    return Tuple(string, NoneType())
+
+
 
 with open("file.couleuvre", "r") as doc:
     document = doc.readlines()
@@ -71,6 +79,10 @@ for key, value in vars.items():
     # None type
     elif value == "None":
         vars[key] = NoneType()
+
+    # Tuple
+    elif value[0] == "(" and value[-1] == ")":
+        vars[key] = makeTuple(value[1:-1])
 
 
 
