@@ -1,19 +1,33 @@
 from type.type import *
 
-# Function to making a tuple from a string
-def makeTuple(string):
-    # Remove white spaces
+# Remove white spaces
+def rm_whitespace(string):
     stri = ""
     for element in string:
         if not element == " ":
             stri += element
-    string = stri
+    return stri
 
+
+
+# Function to making a tuple from a string
+def makeTuple(string):
+    string = rm_whitespace(string)
 
     for i in range(len(string)):
         if string[i] == ",":
             return Tuple(evaluate(string[:i]), makeTuple(string[i+1:])) # Create a Tuple
     return Tuple(evaluate(string), NoneType()) # End of Tuple
+
+
+# Function to making a list from a string
+def makeList(string):
+    string = rm_whitespace(string)
+
+    for i in range(len(string)):
+        if string[i] == ",":
+            return List(evaluate(string[:i]), makeList(string[i+1:])) # Create a Tuple
+    return List(evaluate(string), NoneType()) # End of Tuple
 
 
 
@@ -45,3 +59,7 @@ def evaluate(value):
     # Tuple
     elif value[0] == "(" and value[-1] == ")":
         return makeTuple(value[1:-1])
+
+    # List
+    elif value[0] == "[" and value[-1] == "]":
+        return makeList(value[1:-1])

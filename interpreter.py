@@ -44,11 +44,12 @@ for line in document:
                         vars[line[:i - 1]] = line[i + 1:]
             else:
                 raise_error("plz put somthing after the =")
-print(vars)
+
+
+
 # Type verification
 for key, value in vars.items():
     vars[key] = evaluate(value)
 
 
 print(vars)
-print(type(vars['o'].next.value))
