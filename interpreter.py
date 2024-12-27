@@ -68,6 +68,10 @@ for key, value in vars.items():
           "." in value):
         vars[key] = Floating(value)
 
+    # None type
+    elif value == "None":
+        vars[key] = NoneType()
+
 
 
 
