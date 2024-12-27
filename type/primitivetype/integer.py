@@ -77,5 +77,8 @@ class Integer:
             self.__valueabs = dectobin(-int(value))
             self.__valueopp = self.__valuebin
 
+    def get_valuebin(self):
+        return self.__valuebin
+
     def __repr__(self):
         return str(bintodec(self.__valuebin))

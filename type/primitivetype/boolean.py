@@ -1,6 +1,6 @@
 class Boolean:
     def __init__(self, value):
-        self.__value = value == "None" or value == "0" or value == "False"
+        self.__value = not value == "None" or value == "0" or value == "False"
 
     def __int__(self):
         if not self.__value:
