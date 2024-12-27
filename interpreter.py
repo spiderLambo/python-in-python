@@ -1,14 +1,5 @@
 from errors import *
-from type.type import *
-
-# Function to making a tuple from a string
-def makeTuple(string):
-    for i in range(len(string)):
-        if string[i] == ",":
-            return Tuple(string[:i], makeTuple(string[i+1:]))
-    return Tuple(string, NoneType())
-
-
+from evaluate import evaluate
 
 with open("file.couleuvre", "r") as doc:
     document = doc.readlines()
@@ -53,39 +44,11 @@ for line in document:
                         vars[line[:i - 1]] = line[i + 1:]
             else:
                 raise_error("plz put somthing after the =")
-
+print(vars)
 # Type verification
 for key, value in vars.items():
-    # Boolean
-    if value == "True" or value == "False":
-        vars[key] = Boolean(value)
-
-    # String
-    elif (value[0] == '"'and value[-1] == '"') or (value[0] == "'" and value[-1] == "'"):
-        vars[key] = String(value[1:-1])
-
-    # Integer
-    elif ((value[0] in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"] or
-          (value[0] == "-" and value[1] in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])) and not
-          "." in value):
-        vars[key] = Integer(value)
-
-    # Floating
-    elif ((value[0] in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"] or
-          (value[0] == "-" and value[1] in ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])) and
-          "." in value):
-        vars[key] = Floating(value)
-
-    # None type
-    elif value == "None":
-        vars[key] = NoneType()
-
-    # Tuple
-    elif value[0] == "(" and value[-1] == ")":
-        vars[key] = makeTuple(value[1:-1])
-
-
-
+    vars[key] = evaluate(value)
 
 
 print(vars)
+print(type(vars['o'].next.value))
