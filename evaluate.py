@@ -98,13 +98,13 @@ def evaluate(value):
     elif "and" in value:
         for i in range(len(value)):
             if value[i:i+3] == "and":
-                return evaluate(value[:i]) and evaluate(value[i+3:])
+                return evaluate(value[:i]).__and__(evaluate(value[i+3:]))
 
     # OR
     elif "or" in value:
         for i in range(len(value)):
             if value[i:i + 2] == "or":
-                return evaluate(value[:i]) or evaluate(value[i + 2:])
+                return evaluate(value[:i]).__or__(evaluate(value[i + 2:]))
 
     # Equality
     elif "==" in value:
