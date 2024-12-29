@@ -1,21 +1,21 @@
 class Boolean:
     def __init__(self, value):
-        self.__value = not value == "None" or value == "0" or value == "False"
+        self.value = not (value == "None" or value == "0" or value == "False")
 
     def __int__(self):
-        if not self.__value:
+        if not self.value:
             return 1
         else:
             return 0
 
     def __float__(self):
-        if not self.__value:
+        if not self.value:
             return 1
         else:
             return 0
 
     def __str__(self):
-        if self.__value:
+        if self.value:
             return "True"
         else:
             return "False"
