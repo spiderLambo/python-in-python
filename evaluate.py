@@ -29,6 +29,24 @@ def makeList(string):
             return List(evaluate(string[:i]), makeList(string[i+1:])) # Create a Tuple
     return List(evaluate(string), NoneType()) # End of Tuple
 
+# Function to making a list from a string
+def makeDic(string, d = Dictionary()):
+    if string == "":
+        return d
+    string = rm_whitespace(string)
+    key = -1
+    for i in range(len(string)):
+        if string[i] == ":":
+            key = i
+            if not "," in string:
+                d.add_key(string[:key], evaluate(string[key+1:]))
+        if string[i] == "," and key != -1:
+            d.add_key(string[:key], evaluate(string[key+1:i])) # Adding value in d
+            makeDic(string[i+1:], d)
+            break
+    return d
+
+
 
 
 def evaluate(value):
@@ -63,3 +81,7 @@ def evaluate(value):
     # List
     elif value[0] == "[" and value[-1] == "]":
         return makeList(value[1:-1])
+
+    # Dictionnary
+    elif value[0] == "{" and value[-1] == "}":
+        return makeDic(value[1:-1])

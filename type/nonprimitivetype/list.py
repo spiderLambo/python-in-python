@@ -13,6 +13,12 @@ class List:
             i += 1
         return i
 
+    def __mul__(self, other):
+        if other <= 1:
+            return List(self.value)
+        else:
+            return List(self.value, self * (other-1))
+
     def append(self, value):
         last = self
         while NoneType() != last.next:
@@ -52,12 +58,12 @@ class List:
         else:
             return self.next.index(val, i + 1)
 
-    def insert(self, val, pos):
+    def insert(self, pos, val):
         if pos == 0:
             self.next = List(self.value, self.next)
             self.value = val
         else:
-            self.next.insert(val, pos-1)
+            self.next.insert(pos-1, val)
 
     def pop(self, pos = 0):
         if pos == 1 and NoneType() == self.next.next:
@@ -83,3 +89,26 @@ class List:
         else:
             return "[" + str(self.value) + ", " + str(self.next.__repr__())[1:]
 
+    def __getitem__(self, item):
+        if item == 0:
+            return self.value
+        else:
+            last = self
+            for i in range(item):
+                if NoneType() != last.next:
+                    last = last.next
+            return last.value
+
+    def __setitem__(self, key, value):
+        if key == 0:
+            self.value = value
+        else:
+            self.next[key-1] = value
+
+    def __contains__(self, item):
+        if self.value == item:
+            return True
+        elif NoneType() == self.next:
+            return False
+        else:
+            return item in self.next

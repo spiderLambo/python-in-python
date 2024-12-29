@@ -1,7 +1,8 @@
-vars = {}
+vars = "i"
 p= True
 5 = 5.51201
 ae = "az"
 vars =None
 o = (8,  2,5, 8)
 snjkl=["i", 8, -0.5]
+poijhug = {'a':6,"b" : False , "r" : "'"}
