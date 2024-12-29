@@ -28,7 +28,7 @@ for line in document:
             # After equality verification
             if i+1 <= len(line)-1:
                 if line[i+1] == "=":
-                    raise_error("plz don't enter a comparaison operator alone")
+                    raise_error("plz don't enter a comparison operator alone")
                 elif line[i+1] == " ":
                     if i+1 == len(line)-1:
                         raise_error("plz put somthing after the =")
@@ -44,6 +44,7 @@ for line in document:
                         vars[line[:i - 1]] = line[i + 1:]
             else:
                 raise_error("plz put somthing after the =")
+            break
 
 
 

@@ -1,8 +1,14 @@
-vars = "i"
-p= True
-5 = 5.51201
-ae = "az"
-vars =None
-o = (8,  2,5, 8)
-snjkl=["i", 8, -0.5]
-poijhug = {'a':6,"b" : False , "r" : "'"}
+mul = -5 *-7
+pow = 45 ** 2
+add = 8 +9
+sub = -8 -5
+mod = 9 %8
+and =0 and7
+or = 0 or 5
+not = not 0
+eq = -5 == -5
+ne = 5 != 5
+gt = 5 > 3
+ge = 5 >= 3
+lt = 5 < 8
+le = 5 <= 8
