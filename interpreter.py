@@ -29,7 +29,7 @@ for line in document:
 
 # Type verification
 for key, value in vars.items():
-    vars[key] = evaluateExpression(value)
+    vars[key] = evaluateExpression(value, vars)
 
 
 print(vars)

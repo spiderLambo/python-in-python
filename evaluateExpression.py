@@ -49,96 +49,96 @@ def makeDic(string, d = Dictionary()):
 
 
 # Function to evaluate an expression
-def evaluateExpression(value):
+def evaluateExpression(value, vars = {}):
     value = rm_whitespace(value)
 
 
     # NOT
     if "not" == value[:3]:
-        return not evaluateExpression(value[3:])
+        return not evaluateExpression(value[3:], vars)
 
     # Addition
     elif "+" in value:
         for i in range(len(value)):
             if value[i] == "+":
-                return evaluateExpression(value[:i]) + evaluateExpression(value[i+1:])
+                return evaluateExpression(value[:i], vars) + evaluateExpression(value[i+1:], vars)
 
     # Multiplication or Power
     elif "*" in value:
         for i in range(len(value)):
             if value[i] == "*" and value[i+1] == "*": # Power
-                return evaluateExpression(value[:i]) ** evaluateExpression(value[i + 2:])
+                return evaluateExpression(value[:i], vars) ** evaluateExpression(value[i + 2:], vars)
             elif value[i] == "*": # Multiplication
-                return evaluateExpression(value[:i]) * evaluateExpression(value[i+1:])
+                return evaluateExpression(value[:i], vars) * evaluateExpression(value[i+1:], vars)
 
     # Division
     elif "/" in value:
         for i in range(len(value)):
             if value[i] == "/" and value[i+1] == "/": # Floor div
-                div = evaluateExpression(value[i + 2:])
+                div = evaluateExpression(value[i + 2:], vars)
                 if div == Integer(0):
                     raise_error("u can't divide by 0")
-                return evaluateExpression(value[:i]) // div
+                return evaluateExpression(value[:i], vars) // div
             elif value[i] == "/": # True div
-                div = evaluateExpression(value[i+1:])
+                div = evaluateExpression(value[i+1:], vars)
                 if div == Integer(0):
                     raise_error("u can't divide by 0")
-                return evaluateExpression(value[:i]) / div
+                return evaluateExpression(value[:i], vars) / div
 
     # Modulo
     elif "%" in value:
         for i in range(len(value)):
             if value[i] == "%":
-                div = evaluateExpression(value[i + 1:])
+                div = evaluateExpression(value[i + 1:], vars)
                 if div == Integer(0):
                     raise_error("u can't modulo by 0")
-                return evaluateExpression(value[:i]) % div
+                return evaluateExpression(value[:i], vars) % div
 
     # AND
     elif "and" in value:
         for i in range(len(value)):
             if value[i:i+3] == "and":
-                return evaluateExpression(value[:i]).__and__(evaluateExpression(value[i+3:]))
+                return evaluateExpression(value[:i], vars).__and__(evaluateExpression(value[i+3:], vars))
 
     # OR
     elif "or" in value:
         for i in range(len(value)):
             if value[i:i + 2] == "or":
-                return evaluateExpression(value[:i]).__or__(evaluateExpression(value[i + 2:]))
+                return evaluateExpression(value[:i], vars).__or__(evaluateExpression(value[i + 2:], vars))
 
     # Equality
     elif "==" in value:
         for i in range(len(value)):
             if value[i:i + 2] == "==":
-                return evaluateExpression(value[:i]) == evaluateExpression(value[i + 2:])
+                return evaluateExpression(value[:i], vars) == evaluateExpression(value[i + 2:], vars)
 
     # Inequality
     elif "!=" in value:
         for i in range(len(value)):
             if value[i:i + 2] == "!=":
-                return evaluateExpression(value[:i]) != evaluateExpression(value[i + 2:])
+                return evaluateExpression(value[:i], vars) != evaluateExpression(value[i + 2:], vars)
 
     # Superior
     elif ">" in value:
         for i in range(len(value)):
             if value[i:i + 2] == ">=": # Superior and Equal
-                return evaluateExpression(value[:i]) >= evaluateExpression(value[i + 2:])
+                return evaluateExpression(value[:i], vars) >= evaluateExpression(value[i + 2:], vars)
             if value[i:i + 1] == ">": # Just Superior
-                return evaluateExpression(value[:i]) > evaluateExpression(value[i + 1:])
+                return evaluateExpression(value[:i], vars) > evaluateExpression(value[i + 1:], vars)
 
     # Inferior
     elif "<" in value:
         for i in range(len(value)):
             if value[i:i + 2] == "<=":  # Inferior and Equal
-                return evaluateExpression(value[:i]) <= evaluateExpression(value[i + 2:])
+                return evaluateExpression(value[:i], vars) <= evaluateExpression(value[i + 2:], vars)
             if value[i:i + 1] == "<":  # Just Inferior
-                return evaluateExpression(value[:i]) < evaluateExpression(value[i + 1:])
+                return evaluateExpression(value[:i], vars) < evaluateExpression(value[i + 1:], vars)
 
     # Subtraction
     elif "-" in value[1:]:
         for i in range(1, len(value)):
             if value[i] == "-":
-                return evaluateExpression(value[:i]) - evaluateExpression(value[i + 1:])
+                return evaluateExpression(value[:i], vars) - evaluateExpression(value[i + 1:], vars)
 
 
 
@@ -179,6 +179,10 @@ def evaluateExpression(value):
         # Dictionnary
         elif value[0] == "{" and value[-1] == "}":
             return makeDic(value[1:-1])
+
+        # A variable name
+        elif value in vars:
+            return evaluateExpression(vars[value])
 
         # Error
         else:

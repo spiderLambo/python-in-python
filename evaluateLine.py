@@ -14,11 +14,11 @@ def evaluateLine(line, vars, ifstatement):
     # If statement
     if line[:2] == "if" and line[-1] == ":":
         global condition
-        condition = bool(evaluateExpression(line[2:-1]))
+        condition = bool(evaluateExpression(line[2:-1], vars))
         return condition
 
     # Else
-    if line[:4] == "else":
+    if line[:5] == "else:":
         return not condition
 
 
