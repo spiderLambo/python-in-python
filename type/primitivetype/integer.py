@@ -1,4 +1,4 @@
-from type.type import Boolean
+from type.primitivetype.boolean import Boolean
 
 NUMBER_OF_BYTES = 32
 

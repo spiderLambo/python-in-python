@@ -1,2 +1,1 @@
-mul1 = not False
-mul2 = not True
+mul1 = 0.8 - 0.8
