@@ -140,6 +140,9 @@ class Integer:
     def get_valuebin(self):
         return self.__valuebin
 
+    def get_valuedec(self):
+        return bintodec(self.__valuebin)
+
     def __repr__(self):
         return str(bintodec(self.__valuebin))
 
