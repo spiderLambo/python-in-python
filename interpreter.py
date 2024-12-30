@@ -9,10 +9,22 @@ with open("file.couleuvre", "r") as doc:
 
 
 vars = {}
+ifStatement = False
+skipIndentation = False
 
 # Line evaluation
 for line in document:
-    evaluateLine(line, vars)
+    if line[:4] == "    ":
+        if ifStatement:
+            evaluateLine(line[4:], vars, True)
+        continue
+
+    result = evaluateLine(line, vars, ifStatement)
+
+    if result:
+        ifStatement = True
+    elif not result and line[:4] != "    ":
+        ifStatement = False
 
 
 # Type verification

@@ -1,11 +1,19 @@
 from errors import raise_error
+from evaluateExpression import evaluateExpression
 
-# Comment
 
-def evaluateLine(line, vars):
+
+def evaluateLine(line, vars, ifstatement):
     # Comment
     if line[0] == "#":
         return
+
+    if not ifstatement and line[:4] == "    ":
+        return False
+
+    # If statement
+    if line[:2] == "if" and line[-1] == ":":
+        return bool(evaluateExpression(line[2:-1]))
 
 
     # Equality
