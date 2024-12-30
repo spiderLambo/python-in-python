@@ -10,6 +10,9 @@ with open("file.couleuvre", "r") as doc:
 
 vars = {}
 for line in document:
+    # Comment
+    if line[0] == "#":
+        continue
     for i in range(len(line)):
         # Equality
         if line[i] == "=":
