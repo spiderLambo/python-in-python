@@ -182,7 +182,7 @@ def evaluateExpression(value, vars = {}):
 
         # A variable name
         elif value in vars:
-            return evaluateExpression(vars[value])
+            return evaluateExpression(str(vars[value]))
 
         # Error
         else:
